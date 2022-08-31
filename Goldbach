@@ -1,0 +1,60 @@
+#include <iostream>
+
+// Giải : pnm_miw
+
+bool kiemTraHopSo (int a); // Ham kiem tra so dua vao co phai Hop So hay khong 
+
+int main () {
+     int a;
+     std::cout << "Nhap a: "; // So nhap tu ban phim - la so can phan tich
+     std::cin >> a;
+     int so1 = 0; //tuong ung voi i tai vong lap
+     int so2 = 0; //tuong ung voi j tai vong lap
+     for (int i = 4; i < a; i++) {
+          bool hopSo = kiemTraHopSo (i); //Kiem tra i co phai Hop So khong
+          if (hopSo == 1) {
+               for (int j = (a -1); j >= 8; j--) {
+                    bool hopSo = kiemTraHopSo (j); //Kiem tra j co phai Hop So khong
+                    if (hopSo == 1) {
+                    // Kiem tra ca 2 cung la hop so va tong bang a thi ta gan va dung  lap
+                         if (i+j == a) {
+                              so1 = i;
+                              so2 = j;
+                              break;
+                         }
+                         // Bo qua neu tong 2 so khong bang a
+                         else {
+                              continue;
+                         }
+                    }
+                    // Bo qua vong lap neu j khong phai hop so
+                    else {
+                         continue;
+                    }
+               }
+               // Neu da tim duoc 2 so ta dung vong lap ngoai luon
+               if (so1 != 0 || so2 != 0) {
+                    break;
+               }
+          }
+          // Bo qua so i neu khong phai hop so
+          else{
+               continue;
+          }
+     }
+     std::cout << "\n" << so1 << "\t" << so2 << std::endl;
+}
+
+bool kiemTraHopSo (int a) {
+     bool b = 0;
+     for (int i = 2; i < a; i++) {
+          if (a % i == 0) {
+               bool b = 1;
+               return 1;
+               break;
+          }
+     }
+     if (b == 0) {
+          return 0;
+     }
+}
