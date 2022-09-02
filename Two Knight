@@ -1,0 +1,37 @@
+#include <iostream>
+#include <math.h>
+
+// Giải : pnm_miw
+
+int main () {
+     int a;
+     do {
+          std::cout << "Nhap a: ";
+          std::cin >> a;
+     } while (a <= 0);
+     int dLuotAn = 0;
+     int ix, iy; // i_ma1 : j_ma2
+
+     for (ix = 1; ix <= a; ix++) {
+          for (iy = 1; iy <= a; iy++) {
+
+               for (int jx = 1; jx <= a; jx++) {
+                    for (int jy = 1; jy <= a; jy++) {
+                         if (jx < ix || (jx == ix && jy <= iy)) {
+                              continue;
+                         }
+                         else {
+                              if ((abs(jy-iy) == 2 && abs(jx-ix) == 1) || (abs(jx-ix) == 2 && abs(jy-iy) == 1)) {
+                                   continue;
+                              }
+                              else dLuotAn++;
+                         }
+                    }
+               }
+
+          }
+     }
+     std::cout << dLuotAn;
+
+     return 0;
+}
