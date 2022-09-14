@@ -1,0 +1,55 @@
+#include <iostream>
+
+// Giải : PNM_MIW
+
+void input (int &a, int &b, int &c);
+int tinhCanh (int a, int b, int c);
+
+int main () {
+     int a, b, c; // a = ab, b = bc, c = ca
+     input(a, b, c); //Nhap dien tich 3 mat lien ke
+     
+     if (a == 1 && b == 1 && c == 1) {
+          std::cout << "Tong chieu dai 12 canh la: 12";
+     }
+     else {
+          tinhCanh(a, b, c);
+     }
+
+     return 0;
+}
+
+int tinhCanh (int a, int b, int c) {
+     int i = 2;
+     int canh1, canh2, canh3;
+     while (true) {
+          if (a % i == 0) {`
+               if (b % i == 0) {
+                    canh2 = i;
+                    canh1 = a/i;
+                    canh3 = b/i; 
+                    break;
+               }
+               else if (c % i == 0) {
+                    canh2 = i;
+                    canh1 = a/i;
+                    canh3 = c/i; 
+                    break;
+               }
+               else {
+                    i++;
+                    continue;
+               }
+          }
+     }
+     std::cout << "Tong chieu dai 12 canh la: ";
+     std::cout << canh1*4 + canh2*4 + canh3*4;
+}
+
+void input (int &a, int &b, int &c) {
+     do {
+          std::cout << "Nhap dien tich 3 mat: ";
+          std::cin >> a >> b >> c;
+     } while (a <= 0 || b <= 0 || c <= 0);
+     return;
+}
