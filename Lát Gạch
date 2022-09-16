@@ -1,0 +1,50 @@
+#include <iostream>
+
+// Giải : PNM_MIW
+
+int main () {
+     int n, m, a;
+     std::cout << "Nhap n, m, a: ";
+     std::cin >> n >> m >> a;
+     int array[n][m];
+
+     for (int i = 0; i < n; i++) {
+          for (int j = 0; j < m; j++) {
+               array[i][j] = 0;
+          }
+     }
+
+     int dem = 0;
+
+     // Bắt đầu thực hiện yêu cầu bài toán
+     for (int i = 0; i < n; i++) {
+          for (int j = 0; j < m; j++) {
+               
+               if (array[i][j] == 1) {
+                    continue;
+               }
+               else if (array[i][j] == 0) {
+                    int lhang = ((i+a) > (n-1) ? (i+(n-i)) : (i+a));
+                    int lcot = ((j+a) > (m-1) ? (j+(m-i)) : (j+a));
+                    for (int h = i; h < lhang; h++) {
+                         for (int k = j; k < lcot; k++) {
+                              array[h][k] = 1;
+                         }
+                    }
+                    dem++;
+               }
+
+          }
+     }
+
+     std::cout << dem << std::endl;
+
+     for (int i = 0; i < n; i++) {
+          for (int j = 0; j < m; j++) {
+               std::cout << array[i][j];
+          }
+          std::cout << std::endl;
+     }
+
+     return 0;
+}
