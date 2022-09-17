@@ -1,0 +1,55 @@
+#include <iostream>
+
+// Giải : PNM_MIW
+
+int main () {
+     int a,b,n;
+     std::cout << "Nhap a, b, n: ";
+     std::cin >> a >> b >> n;
+     // a va b là tọa độ
+     // n là số bước cho trước
+
+     // trường hợp đặc biệt : nếu tọa độ là (0,0) thì luôn đi số bước chẵn
+
+     bool kiemtra;
+     if (n == a + b) {
+          kiemtra = true;
+     }
+     else if (n < a+b) {
+          kiemtra = false;
+     }
+     else if (n > a+b && n%2 == 0) {
+          if (a%2 == 0 and b%2 == 0) {
+               kiemtra = false;
+          }
+          else if (a%2 != 0 and b%2 != 0) {
+               kiemtra = true;
+          }
+          else if ((a%2 != 0 and b%2 == 0) or (a%2 == 0 and b%2 != 0)) {
+               kiemtra = false;
+          }
+          if (a == 0 and b == 0) {
+               kiemtra = true;
+          }
+     }
+     else if (n > a+b && n%2 != 0) {
+          if (a%2 == 0 and b%2 == 0) {
+               kiemtra = true;
+          }
+          else if (a%2 != 0 and b%2 != 0) {
+               kiemtra = false;
+          }
+          else if ((a%2 != 0 and b%2 == 0) or (a%2 == 0 and b%2 != 0)) {
+               kiemtra = true;
+          }
+     }
+
+     if (kiemtra == true) {
+          std::cout << "YES";
+     }
+     else if (kiemtra == false) {
+          std::cout << "NO";
+     }
+
+     return 0;
+} 
