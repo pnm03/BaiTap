@@ -1,0 +1,63 @@
+#include <iostream> 
+
+// Giải : PNM_MIW
+
+int soKemLayDuoc (int a, int b);
+/*
+soKemLayDuoc _ là số kem tối đa lấy được của thùng i sau tất cả các lần mở
+a _ so kem tai thung i
+b _ sô lần thùng i đó được mở 
+*/
+
+int main () {
+     int n, m; // n_so thung kem dang co - m_so lan phuc vu
+     //std::cout << "Nhap n, m: ";
+     std::cin >> n >> m;
+
+     int soKemCuaThung[n];
+     //   std::cout << "Nhap so kem:\t";
+     for (int i = 0; i < n; i++) {
+          std::cin >> soKemCuaThung[i];
+          std::cout << " ";
+     }
+
+     // sắp xếp phần tử mảng
+     int num = soKemCuaThung[0];
+     for (int i = 0; i < n; i++) {
+          for (int j = i+1; j < n; j++) {
+               if (soKemCuaThung[i] < soKemCuaThung[j]) {
+                    int dem = soKemCuaThung[i];
+                    soKemCuaThung[i] = soKemCuaThung[j];
+                    soKemCuaThung[j] = dem;
+               }
+          }
+     }
+
+     int soLan = m/n; // Số lần mở tất cả các hộp
+     int conLai = m-(soLan*n); // Số lần cuối được mở (không đủ tất cả các hộp)
+     int soKemNhieuNhat = 0;
+     for (int i = 0; i < n; i++) {
+          if (i < conLai) {
+               soKemNhieuNhat += soKemLayDuoc(soKemCuaThung[i], (soLan+1));
+          }
+          else {
+               soKemNhieuNhat += soKemLayDuoc(soKemCuaThung[i], (soLan));
+          }
+     }
+
+     std::cout << "\n";
+     std::cout << soKemNhieuNhat;
+
+
+
+     return 0;
+}
+
+int soKemLayDuoc (int a, int b) {
+     int num = 0;
+     for (int i = 1; i <= b; i++) {
+          num += a;
+          a /= 2;
+     }
+     return num;
+}
