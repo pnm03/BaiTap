@@ -1,0 +1,48 @@
+#include <iostream>
+
+// Giải : PNM_MIW
+
+int main () {
+     int n; // n la so phan tu cua mang
+     std::cout << "Nhap n: ";
+     std::cin >> n;
+     int mang[n];
+     for (int i = 0; i < n; i++) {
+          std::cout << "Nhap phan tu " << i << ": ";
+          std::cin >> mang[i];
+     }
+
+     int num[100];
+     for (int i = 0; i < 100; i++) {
+          num[i] = 0;
+     }
+     int k = 0;
+
+     for (int i = 0; i < n; i++) {
+          if (mang[i]+1 == mang[i+1]) {
+               if (num[k] == 0) {
+                    std::cout << "\n" << i;
+                    num[k] = mang[i]+mang[i+1];
+               }
+               else {
+                    std::cout << "\n" <<"-" << i;
+                    num[k] += mang[i+1];
+               }
+          }
+          else {
+               k++;
+               continue;
+          }
+     }
+
+     int count = num[0];
+     for (int i = 0; i < 100; i++) {
+               if (count < num[i]) {
+                  count = num[i];  
+               }
+     }
+
+     std::cout << "Tong mang con lien tiep max: " << count;
+
+     return 0;
+}
