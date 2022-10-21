@@ -1,0 +1,76 @@
+#include <iostream>
+
+// Giải : PNM_MIW
+
+int main () {
+     int n;
+     std::cout << "Nhap N: ";
+     std::cin >> n;
+     int mang[n];
+     int mang1[n]; //Mang1[n] giống hệt mang[n] dùng để sắp xếp tăng dần
+     for (int i = 0; i < n; i++) {
+          std::cout << "Nhap tai " << i << " : ";
+          std::cin >> mang[i];
+          mang1[i] = mang[i];
+     }
+
+     //Sắp xếp mang1[n]
+     for (int i = 0; i < n; i++) {
+          for (int j = i+1; j < n; j++) {
+               if (mang1[i] < mang1[j]) {
+                    int num = mang1[i];
+                    mang1[i] = mang1[j];
+                    mang1[j] = num;
+               }
+          }
+     }
+
+     // Bắt đầu thực hiện bài toán
+     int sum = 0; // Tổng tiền chọn được
+     int dem = 0; // đếm số hộp chọn được
+     int save[n]; // Lưu các vị trí hộp được chọn
+     int k = 0; //k là vị trí hiên tại của mảng save[]
+     std::cout << "Cac vi tri duoc chon la: ";
+     for (int i = 0; i < n; i++) {
+          for (int j = 0; j < n; j++) {
+               if (mang1[i] == mang[j]) {
+                    if (k == 0 || k == 1) {
+                         sum += mang1[i];
+                         std::cout << j+1 << "\t";
+                         dem++;
+                         save[k] = j;
+                         k++;
+                    }
+                    else {
+                         bool kiemtra = false;
+                         for (int h = 0; h < k; h++) {
+                              for (int g = 0; g < k; g++) {
+                                   if ((j+save[h])/2 == save[g]) {
+                                        kiemtra = true;
+                                        break;
+                                   }
+                              }
+                         }
+                         if (kiemtra == true) {
+                              continue;
+                         }
+                         else {
+                              sum += mang1[i];
+                              std::cout << j+1 << "\t";
+                              dem++;
+                              save[k] = j;
+                              k++;
+                         }
+                    }
+               }
+               else {
+                    continue;
+               }
+          }
+     }
+
+     std::cout << "\n" << "So hop chon duoc la: " << dem << "\n";
+     std::cout << "So tien nhieu nhat: " << sum;
+
+     return 0;
+}
