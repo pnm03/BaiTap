@@ -1,0 +1,47 @@
+#include <iostream>
+
+// Giải : PNM_MIW
+
+int main () {
+     int n;
+     std::cout << "Nhap n: ";
+     std::cin >> n;
+     int dauSao = n;
+     int dauNga = 0;
+     bool kiemTra = false;
+     for (int i = 1; i <= (n*2)-1; i++) {
+          int a = dauSao;
+          int b = dauNga;
+          if (kiemTra == false) {
+               while (b != 0) {
+                    std::cout << "~";
+                    b--;
+               }
+               while (a != 0) {
+                    std::cout << "*";
+                    a--;
+               }
+               dauNga += 2;
+               dauSao--;
+          }
+          else {
+               while (b > 0) {
+                    std::cout << "~";
+                    b--;
+               }
+               while (a > 0) {
+                    std::cout << "*";
+                    a--;
+               }
+               dauNga -= 2;
+               dauSao++;
+          }
+          //
+          if (dauSao == 1) {
+               kiemTra = true;
+          }
+          std::cout << "\n";
+     }
+
+     return 0;
+}
