@@ -1,0 +1,48 @@
+// Minh_Miw
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+double string_float (std::string a);
+
+int  main () {
+     double a = string_float("1589.123456");
+     std::cout << "a: " << a;
+
+     return 0;
+}
+
+double string_float (std::string a) {
+     // a = "123.45678"
+     bool tam = 0;  // kiểm tra nếu tới dấu '.' thì = 1 
+     double num = 0;     // lấy số đằng trước dấu '.'   => {123}
+     double num2 = 0;    // lấy số đằng sau dấu '.'     => {45678}
+     int dem = 0;   // đếm tổng các số trước dấu '.' và cả dấu '.'   => {4}
+     int dem1 = 0;  // là tổng các số đằng sau dấu '.'   => {5}
+     int tp = 1;
+     for (int i = 0; i < a.length(); i++) {
+          if (a[i] == '.') {
+               tam = 2;
+               dem++;
+               dem1 = dem+1;
+               tam = 1;
+               continue;
+          }
+          if (tam == 0) {
+               num *= 10;
+               num += a[i];
+               num -= 48;
+               dem++;
+          }
+          else if (tam == 1) {
+               double a1 = 1.0/(pow(10,tp));      // chuyển số thành dạng số thập phân tương ứng
+               int a2 = a[i]-48;     // chuyển mã char thành kí tự
+               num2 = num2 + (a1 * a2);
+               tp++;
+          }
+     }
+     double kq = num+num2;
+     // std::cout << "\n";
+     std::cout << std::fixed << std::setprecision(a.length()-dem1+1);
+     return kq;
+}
